@@ -1,4 +1,4 @@
-# ToDO app Task_Timer
+# ToDO app
 
 # https://todo-alpha-drab-75.vercel.app/
 

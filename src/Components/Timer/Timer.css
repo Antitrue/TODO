@@ -1,0 +1,17 @@
+.icon-pause:after {
+	content: '⏸';
+}
+
+.icon-play:after {
+	content: '▶';
+}
+
+.timer > span {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.done,.done > button { 
+    pointer-events: none;
+    opacity: .4;
+}

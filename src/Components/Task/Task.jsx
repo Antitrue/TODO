@@ -1,11 +1,29 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { formatDistanceToNow } from 'date-fns'
+
+import Timer from '../Timer/Timer'
 import './Task.css'
 
-function Task({ description, createdAt, edit, done, onDone, id, removeTask, changeTask, onSubmitTask }) {
+function Task({
+  description,
+  createdAt,
+  edit,
+  done,
+  onDone,
+  id,
+  removeTask,
+  changeTask,
+  onSubmitTask,
+  onPauseTimer,
+  onPlayTimer,
+  timeInSec,
+  handleBlur,
+}) {
   const [text, setText] = useState(description)
   const [flag, setFlag] = useState(false)
   const inpRef = useRef()
+
+  useEffect(() => {}, [timeInSec])
 
   const getText = () => {
     if (inpRef.current.value.trim() !== '') {
@@ -17,6 +35,17 @@ function Task({ description, createdAt, edit, done, onDone, id, removeTask, chan
     changeTask(text, id)
     onSubmitTask(e, id)
     setFlag(false)
+  }
+
+  const onKeyDown = (e) => {
+    if (e.code === 'Escape') {
+      handleBlur(id, text, description, setText)
+      setFlag(false)
+    }
+    if (e.code === 'Enter') {
+      changeTask(text, id)
+      setFlag(false)
+    }
   }
 
   return (
@@ -31,8 +60,9 @@ function Task({ description, createdAt, edit, done, onDone, id, removeTask, chan
           checked={done}
         />
         <label>
-          <span className="description">{description}</span>
-          <span className="created">{`created ${formatDistanceToNow(createdAt, { includeSeconds: true })} ago`}</span>
+          <span className="title">{text}</span>
+          <Timer timeSec={timeInSec} onPlayTimer={onPlayTimer} onPauseTimer={onPauseTimer} id={id} done={done} />
+          <span className="description">{`created ${formatDistanceToNow(createdAt, { includeSeconds: true })} ago`}</span>
         </label>
         <button
           className="icon icon-edit"
@@ -61,8 +91,10 @@ function Task({ description, createdAt, edit, done, onDone, id, removeTask, chan
             value={text}
             onChange={getText}
             autoFocus={flag}
-            onBlur={(e) => saveTask(e)}
+            onKeyDown={(e) => onKeyDown(e)}
+            onBlur={() => handleBlur(id, text, description, setText)}
           />
+          <button type="sumbmit"></button>
         </form>
       )}
     </>

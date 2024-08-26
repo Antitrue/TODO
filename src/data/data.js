@@ -5,6 +5,7 @@ const data = [
     className: 'completed',
     id: 123,
     done: true,
+    timeInSec: 789,
   },
   {
     description: 'Editing task',
@@ -13,6 +14,7 @@ const data = [
     edit: true,
     id: 456,
     done: false,
+    timeInSec: 895,
   },
   {
     description: 'Active task',
@@ -20,6 +22,7 @@ const data = [
     className: null,
     id: 789,
     done: false,
+    timeInSec: 674,
   },
 ]
 
