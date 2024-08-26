@@ -1,6 +1,6 @@
 # ToDO app v2
 
-# [https://todo-alpha-drab-75.vercel.app/](https://12-one-tau.vercel.app/)
+# https://12-one-tau.vercel.app/
 
 # Реальзованый функционал:
 
